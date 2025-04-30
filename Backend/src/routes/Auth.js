@@ -8,7 +8,8 @@ const authenticateToken = require('../middleware/Auth.Middleware');
 
 
 //  ----------------------------------------Inscription utilisateur--------------------------------------------------
- router.post('/register', async (req, res) => {
+ 
+router.post('/register', async (req, res) => {
     try {
         const { prenom , nom , email , password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
