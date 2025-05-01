@@ -6,8 +6,8 @@ const Produit = require("../models/Produit.Model");
 //  ----------------------------------------Ajouter un produit--------------------------------------------------
 const ajouterProduit = async (req, res) => {
   try {
-    const { nom, description, prix, quantite } = req.body;
-    const produit = new Produit({ nom, description, prix, quantite });
+    const { nom, description,image, prix, quantite } = req.body;
+    const produit = new Produit({ nom, description,image , prix, quantite });
     const savedProduit = await produit.save();
     res.status(201).json(savedProduit);
   } catch (error) {
@@ -27,19 +27,22 @@ const afficherProduits = async (req, res) => {
 const afficherProduitParId = async (req, res) => {
   try {
     const produit = await Produit.findById(req.params.id);
-    if (!produit) return res.status(404).json({ message: "Produit non trouvé" });
+    if (!produit)
+        return res.status(404).json({ 
+       message: "Produit non trouvé" });
     res.status(200).json(produit);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+        message: error.message });
   }
 }
 //  ----------------------------------------Modifier un <produit-------------------------------------------------->
 const modifierProduit = async (req, res) => {
   try {
-    const { nom, description, prix, quantite } = req.body;
+    const { nom, description,image , prix, quantite } = req.body;
     const produit = await Produit.findByIdAndUpdate(
       req.params.id,
-      { nom, description, prix, quantite },
+      { nom, description, prix,image , quantite },
       { new: true }
     );
     if (!produit) return res.status(404).json({ message: "Produit non trouvé" });
@@ -52,10 +55,14 @@ const modifierProduit = async (req, res) => {
 const supprimerProduit = async (req, res) => {
   try {
     const produit = await Produit.findByIdAndDelete(req.params.id);
-    if (!produit) return res.status(404).json({ message: "Produit non trouvé" });
-    res.status(200).json({ message: "Produit supprimé avec succès" });
+    if (!produit)
+        return res.status(404).json({
+        message: "Produit non trouvé" });
+    res.status(200).json({ 
+       message: "Produit supprimé avec succès" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+        message: error.message });
   }
 }
 //  ----------------------------------------Routes--------------------------------------------------
