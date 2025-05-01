@@ -10,14 +10,14 @@ const{
   supprimerProduit
 } = require("../controllers/Produit.Controller");
 //  ----------------------------------------Ajouter un produit--------------------------------------------------
-router.post("/ajouterProduit", authenticateToken, ajouterProduit);
+router.post("/ajouterProduit", ajouterProduit);
 //  ----------------------------------------Afficher tous les produits--------------------------------------------------
-router.get("/afficherProduit", authenticateToken, afficherProduits);
+router.get("/afficherProduits",  afficherProduits);
 //  ----------------------------------------Afficher un produit par ID--------------------------------------------------
-router.get("/afficherProduitParId/:id", authenticateToken, afficherProduitParId);
+router.get("/afficherProduitParId/:id", afficherProduitParId);
 //  ----------------------------------------Modifier un produit--------------------------------------------------
-router.put("/modifierProduitPard/:id", authenticateToken, modifierProduit);
+router.put("/modifierProduitPard/:id",  modifierProduit);
 //  ----------------------------------------Supprimer un produit--------------------------------------------------
-router.delete("/supprimerProduitParId/:id", authenticateToken, supprimerProduit);
-//  ----------------------------------------Exporter le router--------------------------------------------------
+router.delete("/supprimerProduitParId/:id",  supprimerProduit);
+
 module.exports = router;

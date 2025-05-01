@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const router = express.Router();
 const Produit = require("../models/Produit.Model");
 
 //  ----------------------------------------Ajouter un produit--------------------------------------------------
 const ajouterProduit = async (req, res) => {
   try {
-    const { nom, description,image, prix, quantite } = req.body;
+    const { nom, description,image, prix,categorie, quantite } = req.body;
     const produit = new Produit({ nom, description,image , prix, quantite });
     const savedProduit = await produit.save();
     res.status(201).json(savedProduit);
