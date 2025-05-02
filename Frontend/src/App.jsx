@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ListView />} />
           <Route path="/Addproduit" element={<AddView />} />
-          <Route path="/Editproduit" element={<EditView />} />
+          <Route path="/Editproduit/:id" element={<EditView />} />
           <Route path="/register" element={<RegisterView />} />
           <Route path="/Login" element={<LoginView />} />
         </Routes>

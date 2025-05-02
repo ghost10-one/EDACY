@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
-const express = require("express");
+import mongoose from "mongoose";
+import express from "express";
 const Produit = require("../models/Produit.Model");
 
 //  ----------------------------------------Ajouter un produit--------------------------------------------------
 const ajouterProduit = async (req, res) => {
   try {
-    const { nom, description,image, prix,categorie, quantite } = req.body;
-    const produit = new Produit({ nom, description,image , prix, quantite });
+    const { nom, description, image, prix, quantite } = req.body;
+    const produit = new Produit({ nom, description, image, prix, quantite });
     const savedProduit = await produit.save();
     res.status(201).json(savedProduit);
   } catch (error) {
@@ -14,7 +14,7 @@ const ajouterProduit = async (req, res) => {
   }
 }
 //  ----------------------------------------Afficher tous les produits--------------------------------------------------
-const afficherProduits = async (req, res) => {
+const afficherProduits = async (_, res) => {
   try {
     const produits = await Produit.find();
     res.status(200).json(produits);
@@ -24,8 +24,9 @@ const afficherProduits = async (req, res) => {
 }
 //  ----------------------------------------Afficher un produit par ID--------------------------------------------------
 const afficherProduitParId = async (req, res) => {
+  const id = req.params.id;
   try {
-    const produit = await Produit.findById(req.params.id);
+    const produit = await Produit.findById({_id:id});
     if (!produit)
         return res.status(404).json({ 
        message: "Produit non trouvé" });
@@ -38,13 +39,16 @@ const afficherProduitParId = async (req, res) => {
 //  ----------------------------------------Modifier un <produit-------------------------------------------------->
 const modifierProduit = async (req, res) => {
   try {
+    const id =req.params.id
     const { nom, description,image , prix, quantite } = req.body;
     const produit = await Produit.findByIdAndUpdate(
-      req.params.id,
-      { nom, description, prix,image , quantite },
+      {id},
+      { nom, description, prix,image , quantite,categorie },
       { new: true }
-    );
-    if (!produit) return res.status(404).json({ message: "Produit non trouvé" });
+    );s
+    if (!produit)
+       return 
+      res.status(404).json({ message: "Produit non trouvé" });
     res.status(200).json(produit);
   } catch (error) {
     res.status(500).json({ message: error.message });
