@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
-import express from "express";
+
+
+
 const Produit = require("../models/Produit.Model");
 
 //  ----------------------------------------Ajouter un produit--------------------------------------------------
