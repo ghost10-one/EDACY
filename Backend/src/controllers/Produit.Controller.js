@@ -1,6 +1,4 @@
 
-
-
 const Produit = require("../models/Produit.Model");
 
 //  ----------------------------------------Ajouter un produit--------------------------------------------------
